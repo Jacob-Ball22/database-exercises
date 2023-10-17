@@ -59,6 +59,20 @@ ORDER BY username_count DESC;
 
 -- From your previous query, are there any duplicate usernames? What is the highest number of times a username shows up? Bonus: How many duplicate usernames are there?
 #Yes, there are duplicate usernames, the highest number of times is 6, there are 13,251 rows of duplicate usernames
+SELECT count(*)
+FROM
+	(SELECT 
+	LOWER(CONCAT(
+	LEFT(first_name, 1),
+	LEFT(last_name, 4),
+	"_", 
+	SUBSTRING(birth_date, 6,2),
+	SUBSTRING(birth_date,3,2))) AS username,
+	COUNT(*) AS username_count
+	FROM employees
+	GROUP BY username
+    HAVING username_count > 1
+	ORDER BY username_count DESC) as un_counts;
 
 -- Bonus: More practice with aggregate functions:
 -- Determine the historic average salary for each employee. When you hear, read, or think "for each" with regard to SQL, you'll probably be grouping by that exact column.
@@ -68,10 +82,11 @@ FROM salaries
 GROUP BY emp_no;
 
 -- Using the dept_emp table, count how many current employees work in each department. The query result should show 9 rows, one for each department and the employee count.
-SELECT dept_no,
-	COUNT(emp_no) as employees
+SELECT dept_no, COUNT(emp_no) as emp_count
 FROM dept_emp
+WHERE to_date = '9999-01-01'
 GROUP BY dept_no;
+
 
 -- Determine how many different salaries each employee has had. This includes both historic and current.
 SELECT emp_no,
