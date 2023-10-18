@@ -34,8 +34,8 @@ use employees;
 SELECT * FROM departments;
 
 -- Using the example in the Associative Table Joins section as a guide, write a query that shows each department along with the name of the current manager for that department.
-SELECT d.dept_name AS Department_Name, 
-	CONCAT (e.first_name, ' ', e.last_name) AS Department_Manager
+SELECT d.dept_name AS 'Department Name', 
+	CONCAT (e.first_name, ' ', e.last_name) AS 'Department Manager'
 FROM employees AS e
 JOIN dept_manager AS dm
 	ON dm.emp_no = e.emp_no
@@ -57,8 +57,8 @@ ORDER BY dept_name ASC;
 --   Sales              | Hauke Zhang
 
 -- Find the name of all departments currently managed by women.
-SELECT d.dept_name AS Department_Name, 
-	CONCAT (e.first_name, ' ', e.last_name) AS Department_Manager
+SELECT d.dept_name AS 'Department Name', 
+	CONCAT (e.first_name, ' ', e.last_name) AS 'Department Manager'
 FROM employees AS e
 JOIN dept_manager AS dm
 	ON dm.emp_no = e.emp_no
@@ -77,7 +77,7 @@ ORDER BY dept_name ASC;
 
 -- Find the current titles of employees currently working in the Customer Service department.
 SELECT t.title AS Title, 
-	COUNT(t.emp_no) AS Emp_Count
+	COUNT(t.emp_no) AS 'Count'
 FROM dept_emp as de
 JOIN titles as t
 	ON t.emp_no = de.emp_no
@@ -98,8 +98,8 @@ ORDER BY t.title ASC;
 -- Technique Leader   |   241
 
 -- Find the current salary of all current managers.
-SELECT d.dept_name AS Department_Name, 
-	CONCAT (e.first_name, ' ', e.last_name) AS Department_Manager,
+SELECT d.dept_name AS 'Department Name', 
+	CONCAT (e.first_name, ' ', e.last_name) AS 'Name',
     s.salary as Salary
 FROM employees AS e
 JOIN dept_manager AS dm
@@ -243,9 +243,9 @@ ORDER BY Avg_Salary DESC;
 -- +--------------------+----------------+
 
 -- Bonus Find the names of all current employees, their department name, and their current manager's name.
-SELECT CONCAT (e.first_name, ' ', e.last_name) AS Employee_Name, 
-	d.dept_name AS Department_Name,
-    CONCAT (m.first_name, ' ', m.last_name) AS Manager_Name
+SELECT CONCAT (e.first_name, ' ', e.last_name) AS 'Employee Name', 
+	d.dept_name AS 'Department Name',
+    CONCAT (m.first_name, ' ', m.last_name) AS 'Manager Name'
 FROM employees e
 JOIN dept_emp AS de 
 	ON de.emp_no = e.emp_no
