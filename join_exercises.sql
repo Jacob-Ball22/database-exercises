@@ -211,7 +211,7 @@ LIMIT 1;
 
 -- Determine the average salary for each department. Use all salary information and round your results.
 SELECT d.dept_name AS Department_Name, 
-    ROUND(AVG(s.salary)) AS Avg_Salary
+    ROUND(AVG(s.salary),0) AS Avg_Salary
 FROM departments AS d
 JOIN dept_emp AS de
 	ON de.dept_no = d.dept_no
